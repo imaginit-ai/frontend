@@ -1,0 +1,21 @@
+.icon-button-icon,
+.icon-button-reverse-icon {
+  position: absolute !important;
+  top: 50% !important;
+  left: 4px;
+  transform: translateY(-53%) !important;
+  transition: all 0.3s ease !important;
+}
+
+.icon-button-reverse-icon {
+  left: auto !important;
+  right: 4px !important;
+}
+
+.icon-button-reverse:hover .icon-button-reverse-icon {
+  transform: translateY(-53%) translateX(-3px) !important;
+}
+
+.icon-button:hover .icon-button-icon {
+  transform: translateY(-53%) translateX(3px) !important;
+}

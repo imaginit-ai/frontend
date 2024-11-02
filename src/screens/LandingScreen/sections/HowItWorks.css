@@ -1,0 +1,35 @@
+.hiw__section {
+  width: 100%;
+  padding: 75px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 3rem;
+}
+
+.hiw__section-left {
+  width: 50%;
+  height: 100%;
+  font-size: 36px !important;
+  text-align: left;
+}
+
+.hiw__section-right {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 1rem;
+  padding-bottom: 0;
+  gap: 2.5rem;
+}
+
+.hiw__icon-container {
+  padding: 1rem;
+  border-radius: 18px;
+  margin-bottom: 1rem;
+  width: fit-content;
+}
