@@ -25,8 +25,13 @@ export const SiteMap: Record<SiteScreens, SiteMapLink> = {
     slug: "/",
     children: {
       LearnMore: {
-        displayName: "Learn more",
+        displayName: "Learn More",
         slug: "/#learn-more",
+        children: {},
+      },
+      ScheduleDemo: {
+        displayName: "Schedule Demo",
+        slug: "/#demo",
         children: {},
       },
     },

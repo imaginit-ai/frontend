@@ -8,6 +8,8 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { SiteMap } from "@/types";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "../ui/button";
 
 const Navbar = () => {
   type NavbarLink = {
@@ -23,11 +25,17 @@ const Navbar = () => {
       type: "hash",
     },
     {
-      name: SiteMap.GenerateScreen.displayName,
+      name: SiteMap.LandingScreen.children.ScheduleDemo.displayName,
+      url: SiteMap.LandingScreen.children.ScheduleDemo.slug,
+      type: "hash",
+    },
+    {
+      name: "Try for Free",
       url: SiteMap.GenerateScreen.slug,
     },
   ];
 
+  const actionBtnStyle = cn(buttonVariants({ variant: "accent", size: "sm" }));
   return (
     <div className="navbar h-navbar-height w-full flex items-center flex-col backdrop-blur-[14px] sticky top-0 z-50">
       <div className="flex h-full items-center justify-between px-[100px] w-full max-w-[1400px]">
@@ -39,12 +47,12 @@ const Navbar = () => {
         </a>
         <NavigationMenu>
           <NavigationMenuList>
-            <NavigationMenuItem className="flex gap-8">
+            <NavigationMenuItem className="flex gap-8 items-center">
               {links.map((link, index) =>
                 link.type === "hash" ? (
                   <HashLink
                     key={index}
-                    className="font-neometric"
+                    className="font-poppins"
                     to={link.url}
                     smooth
                   >
@@ -53,7 +61,11 @@ const Navbar = () => {
                 ) : (
                   <NavigationMenuLink
                     key={index}
-                    className="font-neometric"
+                    className={
+                      link.url === "/generate"
+                        ? actionBtnStyle
+                        : "font-neometric"
+                    }
                     href={link.url}
                   >
                     {link.name}
