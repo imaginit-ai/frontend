@@ -5,6 +5,7 @@ import LandingScreen from "./screens/LandingScreen/LandingScreen";
 // import PageNotFound from "./screens/PageNotFound";
 // import TransferScreen from "./screens/TransferScreen/TransferScreen";
 import { SiteMap } from "./types";
+import GenerateScreen from "./screens/GenerateScreen/GenerateScreen";
 
 function App() {
   return (
@@ -12,6 +13,10 @@ function App() {
       <Navbar />
       <Routes>
         <Route path={SiteMap.LandingScreen.slug} element={<LandingScreen />} />
+        <Route
+          path={SiteMap.GenerateScreen.slug}
+          element={<GenerateScreen />}
+        />
       </Routes>
     </BrowserRouter>
   );

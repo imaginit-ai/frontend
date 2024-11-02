@@ -18,9 +18,13 @@ const Navbar = () => {
 
   const links: NavbarLink[] = [
     {
-      name: SiteMap.LandingScreen.children.HowItWorks.displayName,
-      url: SiteMap.LandingScreen.children.HowItWorks.slug,
+      name: SiteMap.LandingScreen.children.LearnMore.displayName,
+      url: SiteMap.LandingScreen.children.LearnMore.slug,
       type: "hash",
+    },
+    {
+      name: SiteMap.GenerateScreen.displayName,
+      url: SiteMap.GenerateScreen.slug,
     },
   ];
 

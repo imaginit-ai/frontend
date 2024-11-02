@@ -1,7 +1,7 @@
 import { TypographyH2 } from "@/components/ui/typography";
-import "./HowItWorks.css";
+import "./LearnMore.css";
 
-const HowItWorks = () => {
+const LearnMore = () => {
   return (
     <div
       className="how-it-works w-full flex flex-col gap-[32px] scroll-mt-[100px]"
@@ -53,4 +53,4 @@ const HowItWorks = () => {
   );
 };
 
-export default HowItWorks;
+export default LearnMore;
