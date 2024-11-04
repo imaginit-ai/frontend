@@ -43,3 +43,10 @@ export const SiteMap: Record<SiteScreens, SiteMapLink> = {
     children: {},
   },
 };
+
+export enum VideoCreatorState {
+  Idle = "Idle",
+  LoadingQuota = "LoadingQuota",
+  GeneratingVideo = "GeneratingVideo",
+  Error = "Error",
+}
