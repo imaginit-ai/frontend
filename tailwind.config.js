@@ -86,6 +86,7 @@ module.exports = {
       },
       height: {
         "navbar-height": "var(--navbar-height)",
+        "footer-height": "var(--footer-height)",
       },
     },
   },

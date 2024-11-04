@@ -1,13 +1,14 @@
 import "./LandingScreen.css";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { TypographyH1, TypographyH3 } from "@/components/ui/typography";
+import { Button } from "@/components/ui/button";
+import {
+  TypographyH1,
+  TypographyH2,
+  TypographyH3,
+} from "@/components/ui/typography";
 import { ArrowRight, Calendar } from "lucide-react";
 import NavyLogo from "../../assets/logos/navy.png";
-import { HashLink } from "react-router-hash-link";
-import { cn } from "@/lib/utils";
 import { SiteMap } from "@/types";
 import LearnMore from "./sections/LearnMore";
-import ScheduleDemo from "./sections/ScheduleDemo";
 import { useNavigate } from "react-router-dom";
 
 const LandingScreen = () => {
@@ -30,22 +31,19 @@ const LandingScreen = () => {
             </TypographyH1>
           </div>
           <TypographyH3 className="text-center font-poppins text-[22px] opacity-40 px-[100px]">
-            Supercharge your learning with personalized animations for any idea.
+            Learn visually with personalized, engaging animations for every
+            idea.
           </TypographyH3>
         </div>
         <div className="flex flex-row gap-4 items-center justify-center">
-          <HashLink
-            to={SiteMap.LandingScreen.children.ScheduleDemo.slug}
-            smooth
-            className={cn(
-              buttonVariants({
-                variant: "outline",
-              })
-            )}
+          <Button
+            className="icon-button"
+            variant={"outline"}
+            onClick={() => navigate(SiteMap.ScheduleDemoScreen.slug)}
           >
             <Calendar className="mr-2" size={16} />
             Schedule Demo
-          </HashLink>
+          </Button>
           {/* </Button> */}
           <Button
             className="icon-button"
@@ -59,7 +57,11 @@ const LandingScreen = () => {
         </div>
       </div>
       <LearnMore />
-      <ScheduleDemo />
+      <div className="w-full flex flex-col gap-[32px] pb-24">
+        <TypographyH2 className="text-center font-semibold text-5xl leading-[4rem] whitespace-nowrap">
+          supercharge your learning.
+        </TypographyH2>
+      </div>
     </div>
   );
 };

@@ -19,7 +19,7 @@
     --primary-foreground: 204 22% 97%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 220 29% 14%;
-    --muted: 210 40% 96.1%;
+    --muted: 198 26% 94%;
     --muted-foreground: 215.4 16.3% 46.9%;
     /* --accent: 10 88% 63%; */
     --accent: 216.11 86.83% 52.35%;
@@ -38,7 +38,8 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
 
-    --navbar-height: 4.5rem !important;
+    --navbar-height: 4.75rem !important;
+    --footer-height: 9rem !important;
   }
 
   .dark {
@@ -53,7 +54,7 @@
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted-foreground: 210 40% 98%;
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
@@ -82,7 +83,7 @@
 @layer components {
   .glass {
     background: hsl(var(--card));
-    border-radius: 32px;
+    border-radius: 24px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);

@@ -25,9 +25,8 @@ const Navbar = () => {
       type: "hash",
     },
     {
-      name: SiteMap.LandingScreen.children.ScheduleDemo.displayName,
-      url: SiteMap.LandingScreen.children.ScheduleDemo.slug,
-      type: "hash",
+      name: SiteMap.ScheduleDemoScreen.displayName,
+      url: SiteMap.ScheduleDemoScreen.slug,
     },
     {
       name: "Try for Free",
@@ -64,7 +63,7 @@ const Navbar = () => {
                     className={
                       link.url === "/generate"
                         ? actionBtnStyle
-                        : "font-neometric"
+                        : "font-poppins flex justify-center items-center"
                     }
                     href={link.url}
                   >

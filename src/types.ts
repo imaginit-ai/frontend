@@ -16,6 +16,7 @@ export class SiteMapLink {
 
 export enum SiteScreens {
   LANDING = "LandingScreen",
+  SCHEDULE_DEMO = "ScheduleDemoScreen",
   GENERATE = "GenerateScreen",
 }
 
@@ -29,12 +30,12 @@ export const SiteMap: Record<SiteScreens, SiteMapLink> = {
         slug: "/#learn-more",
         children: {},
       },
-      ScheduleDemo: {
-        displayName: "Schedule Demo",
-        slug: "/#demo",
-        children: {},
-      },
     },
+  },
+  [SiteScreens.SCHEDULE_DEMO]: {
+    displayName: "Schedule Demo",
+    slug: "/schedule-demo",
+    children: {},
   },
   [SiteScreens.GENERATE]: {
     displayName: "Generate",

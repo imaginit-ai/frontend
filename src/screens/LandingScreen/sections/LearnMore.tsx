@@ -14,7 +14,7 @@ const LearnMore = () => {
     >
       <div className="hiw__section glass">
         <TypographyH2 className="hiw__section-left">
-          you imagine it. we animate it.
+          you imagine it, we animate it.
           {/* never stuggle with complex topics again. */}
         </TypographyH2>
         <div className="hiw__section-right">

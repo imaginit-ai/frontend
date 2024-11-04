@@ -1,13 +1,12 @@
-import { Separator } from "../ui/separator";
 import { TypographyH3 } from "../ui/typography";
 import logo from "../../assets/logos/navy.png";
-import "./Footer.css";
+import { Separator } from "../ui/separator";
 
 const Footer = () => {
   return (
-    <div className="footer p-10">
+    <div className="max-h-footer-height px-[100px] w-full max-w-[1400px] m-auto">
       <Separator orientation="horizontal" />
-      <div className="footer-content pt-10 pb-10">
+      <div className="footer-content h-full w-full pt-10 pb-10">
         <a className="flex items-center" href="/">
           <img className="w-[24px] h-[24px] mb-[5px]" src={logo} />
           <TypographyH3 className="ml-[10px] text-foreground font-semibold">
@@ -16,6 +15,31 @@ const Footer = () => {
         </a>
       </div>
     </div>
+    // <footer className="py-6 md:px-8 md:py-0">
+    //   <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+    //     <p className="text-balance text-center text-sm leading-loose text-muted-foreground md:text-left">
+    //       Built by{" "}
+    //       <a
+    //         // href={siteConfig.links.twitter}
+    //         target="_blank"
+    //         rel="noreferrer"
+    //         className="font-medium underline underline-offset-4"
+    //       >
+    //         shadcn
+    //       </a>
+    //       . The source code is available on{" "}
+    //       <a
+    //         // href={siteConfig.links.github}
+    //         target="_blank"
+    //         rel="noreferrer"
+    //         className="font-medium underline underline-offset-4"
+    //       >
+    //         GitHub
+    //       </a>
+    //       .
+    //     </p>
+    //   </div>
+    // </footer>
   );
 };
 

@@ -3,10 +3,10 @@ import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import LandingScreen from "./screens/LandingScreen/LandingScreen";
 // import PageNotFound from "./screens/PageNotFound";
-// import TransferScreen from "./screens/TransferScreen/TransferScreen";
 import { SiteMap } from "./types";
 import GenerateScreen from "./screens/GenerateScreen/GenerateScreen";
 import Footer from "./components/Footer/Footer";
+import ScheduleDemoScreen from "./screens/ScheduleDemoScreen/ScheduleDemoScreen";
 
 function App() {
   return (
@@ -14,6 +14,10 @@ function App() {
       <Navbar />
       <Routes>
         <Route path={SiteMap.LandingScreen.slug} element={<LandingScreen />} />
+        <Route
+          path={SiteMap.ScheduleDemoScreen.slug}
+          element={<ScheduleDemoScreen />}
+        />
         <Route
           path={SiteMap.GenerateScreen.slug}
           element={<GenerateScreen />}
