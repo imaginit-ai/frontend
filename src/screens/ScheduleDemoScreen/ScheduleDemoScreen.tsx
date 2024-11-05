@@ -6,7 +6,7 @@ import "./ScheduleDemoScreen.css";
 const ScheduleDemoScreen = () => {
   useEffect(() => {
     (async function () {
-      const cal = await getCalApi({ namespace: "30min" });
+      const cal = await getCalApi({ namespace: "20min" });
       cal("ui", {
         theme: "light",
         styles: {
