@@ -15,11 +15,7 @@ import { buttonVariants } from "../ui/button";
 
 const actionBtnStyle = cn(buttonVariants({ variant: "accent", size: "sm" }));
 
-export const getNavbarLinkElement = (
-  link: NavbarLink,
-  index: number,
-  mobile?: boolean
-) => {
+export const getNavbarLinkElement = (link: NavbarLink, index: number) => {
   switch (link.type) {
     case "hash":
       return (

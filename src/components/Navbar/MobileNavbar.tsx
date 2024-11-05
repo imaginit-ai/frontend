@@ -64,7 +64,7 @@ const MobileNavbar = (props: MobileNavbarProps) => {
               (link, index) =>
                 index !== props.links.length - 1 && (
                   <div key={index} className="mobile-menu-item">
-                    {getNavbarLinkElement(link, index, true)}
+                    {getNavbarLinkElement(link, index)}
                     <Separator orientation="horizontal" />
                   </div>
                 )
