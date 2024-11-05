@@ -26,8 +26,8 @@ const ScheduleDemoScreen = () => {
       </TypographyH1>
       <div className="min-h-36 mt-10 mb-10 w-full">
         <Cal
-          namespace="30min"
-          calLink="imaginit/30min"
+          namespace="20min"
+          calLink="imaginit/20min"
           style={{ width: "100%", height: "100%", overflow: "scroll" }}
           config={{ layout: "month_view", theme: "light" }}
         />
