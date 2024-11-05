@@ -38,10 +38,16 @@ export const SiteMap: Record<SiteScreens, SiteMapLink> = {
     children: {},
   },
   [SiteScreens.GENERATE]: {
-    displayName: "Generate",
+    displayName: "Try for Free",
     slug: "/generate",
     children: {},
   },
+};
+
+export type NavbarLink = {
+  name: string;
+  url: string;
+  type: "hash" | "link" | "action" | "external";
 };
 
 export enum VideoCreatorState {

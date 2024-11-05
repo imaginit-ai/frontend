@@ -33,3 +33,34 @@
   margin-bottom: 1rem;
   width: fit-content;
 }
+
+@media screen and (max-width: 820px) {
+  .hiw__section {
+    flex-direction: column;
+    gap: 2.5rem;
+    padding: 50px 25px;
+  }
+
+  .hiw__section>* {
+    text-align: center;
+  }
+
+  .hiw__section-left {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hiw__section-right {
+    width: 100%;
+    align-items: center;
+    gap: 3.5rem;
+  }
+
+  .hiw__section-right__block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 400px;
+  }
+}

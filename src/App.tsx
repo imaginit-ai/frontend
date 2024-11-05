@@ -5,7 +5,6 @@ import LandingScreen from "./screens/LandingScreen/LandingScreen";
 // import PageNotFound from "./screens/PageNotFound";
 import { SiteMap } from "./types";
 import GenerateScreen from "./screens/GenerateScreen/GenerateScreen";
-import Footer from "./components/Footer/Footer";
 import ScheduleDemoScreen from "./screens/ScheduleDemoScreen/ScheduleDemoScreen";
 
 function App() {
@@ -23,7 +22,7 @@ function App() {
           element={<GenerateScreen />}
         />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 }

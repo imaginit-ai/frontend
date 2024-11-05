@@ -1,0 +1,15 @@
+  .landing-jw__title {
+    font-size: 46px;
+    text-align: center;
+  }
+
+  .landing-jw__subtitle {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .landing-jw__title {
+      font-size: 36px;
+    }
+  }

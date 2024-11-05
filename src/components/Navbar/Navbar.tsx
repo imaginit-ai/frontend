@@ -7,17 +7,62 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { SiteMap } from "@/types";
+import { NavbarLink, SiteMap } from "@/types";
+import MobileNavbar from "./MobileNavbar";
+import "./Navbar.css";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
 
-const Navbar = () => {
-  type NavbarLink = {
-    name: string;
-    url: string;
-    type?: "hash" | "link";
-  };
+const actionBtnStyle = cn(buttonVariants({ variant: "accent", size: "sm" }));
 
+export const getNavbarLinkElement = (
+  link: NavbarLink,
+  index: number,
+  mobile?: boolean
+) => {
+  switch (link.type) {
+    case "hash":
+      return (
+        <HashLink key={index} className="font-poppins" to={link.url} smooth>
+          {link.name}
+        </HashLink>
+      );
+    case "link":
+      return (
+        <NavigationMenuLink
+          key={index}
+          className="font-poppins flex justify-center items-center"
+          href={link.url}
+        >
+          {link.name}
+        </NavigationMenuLink>
+      );
+    case "external":
+      return (
+        <NavigationMenuLink
+          key={index}
+          className="font-poppins flex justify-center items-center"
+          href={link.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {link.name}
+        </NavigationMenuLink>
+      );
+    case "action":
+      return (
+        <NavigationMenuLink
+          key={index}
+          className={actionBtnStyle}
+          href={link.url}
+        >
+          {link.name}
+        </NavigationMenuLink>
+      );
+  }
+};
+
+const Navbar = () => {
   const links: NavbarLink[] = [
     {
       name: SiteMap.LandingScreen.children.LearnMore.displayName,
@@ -25,19 +70,25 @@ const Navbar = () => {
       type: "hash",
     },
     {
-      name: SiteMap.ScheduleDemoScreen.displayName,
-      url: SiteMap.ScheduleDemoScreen.slug,
+      name: "Join Waitlist",
+      url: "https://getwaitlist.com/waitlist/21884",
+      type: "external",
     },
     {
-      name: "Try for Free",
+      name: SiteMap.ScheduleDemoScreen.displayName,
+      url: SiteMap.ScheduleDemoScreen.slug,
+      type: "link",
+    },
+    {
+      name: SiteMap.GenerateScreen.displayName,
       url: SiteMap.GenerateScreen.slug,
+      type: "action",
     },
   ];
 
-  const actionBtnStyle = cn(buttonVariants({ variant: "accent", size: "sm" }));
   return (
-    <div className="navbar h-navbar-height w-full flex items-center flex-col backdrop-blur-[14px] sticky top-0 z-50">
-      <div className="flex h-full items-center justify-between px-[100px] w-full max-w-[1400px]">
+    <div className="navbar h-navbar-height w-full flex items-center flex-col backdrop-blur-[14px] fixed top-0 z-50">
+      <div className="web-menu flex h-full items-center justify-between px-[100px] w-full max-w-[1400px]">
         <a className="flex items-center" href="/">
           <img className="w-[24px] h-[24px] mb-[5px]" src={logo} />
           <TypographyH3 className="ml-[10px] text-foreground font-semibold">
@@ -47,35 +98,13 @@ const Navbar = () => {
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem className="flex gap-8 items-center">
-              {links.map((link, index) =>
-                link.type === "hash" ? (
-                  <HashLink
-                    key={index}
-                    className="font-poppins"
-                    to={link.url}
-                    smooth
-                  >
-                    {link.name}
-                  </HashLink>
-                ) : (
-                  <NavigationMenuLink
-                    key={index}
-                    className={
-                      link.url === "/generate"
-                        ? actionBtnStyle
-                        : "font-poppins flex justify-center items-center"
-                    }
-                    href={link.url}
-                  >
-                    {link.name}
-                  </NavigationMenuLink>
-                )
-              )}
+              {links.map((link, index) => getNavbarLinkElement(link, index))}
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
       </div>
       {/* <Separator /> */}
+      <MobileNavbar links={links} />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { useEffect } from "react";
 import { TypographyH1 } from "@/components/ui/typography";
+import "./ScheduleDemoScreen.css";
 
 const ScheduleDemoScreen = () => {
   useEffect(() => {
@@ -19,8 +20,8 @@ const ScheduleDemoScreen = () => {
     })();
   }, []);
   return (
-    <div className="w-full min-h-[calc(100%-var(--navbar-height)-var(--footer-height))] flex flex-col justify-center items-center px-[100px] max-w-[1400px] m-auto pt-16">
-      <TypographyH1 className="text-center text-5xl">
+    <div className="schedule-screen w-full min-h-full flex flex-col justify-center items-center px-[100px] max-w-[1400px] m-auto pt-[var(--navbar-height)]">
+      <TypographyH1 className="text-center text-5xl mt-16">
         interested? let's talk.
       </TypographyH1>
       <div className="min-h-36 mt-10 mb-10 w-full">
