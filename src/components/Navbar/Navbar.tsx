@@ -83,25 +83,27 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="navbar h-navbar-height w-full flex items-center flex-col backdrop-blur-[14px] fixed top-0 z-50">
-      <div className="web-menu flex h-full items-center justify-between px-[100px] w-full max-w-[1400px]">
-        <a className="flex items-center" href="/">
-          <img className="w-[24px] h-[24px] mb-[5px]" src={logo} />
-          <TypographyH3 className="ml-[10px] text-foreground font-semibold">
-            imaginit
-          </TypographyH3>
-        </a>
-        <NavigationMenu>
-          <NavigationMenuList>
-            <NavigationMenuItem className="flex gap-8 items-center">
-              {links.map((link, index) => getNavbarLinkElement(link, index))}
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
+    <>
+      <div className="navbar h-navbar-height w-full flex items-center flex-col backdrop-blur-[14px] fixed top-0">
+        <div className="web-menu flex h-full items-center justify-between px-[100px] w-full max-w-[1400px]">
+          <a className="flex items-center" href="/">
+            <img className="w-[24px] h-[24px] mb-[5px]" src={logo} />
+            <TypographyH3 className="ml-[10px] text-foreground font-semibold">
+              imaginit
+            </TypographyH3>
+          </a>
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem className="flex gap-8 items-center">
+                {links.map((link, index) => getNavbarLinkElement(link, index))}
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+        </div>
+        {/* <Separator /> */}
       </div>
-      {/* <Separator /> */}
       <MobileNavbar links={links} />
-    </div>
+    </>
   );
 };
 

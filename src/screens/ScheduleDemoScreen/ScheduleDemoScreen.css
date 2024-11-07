@@ -3,4 +3,8 @@
     padding-left: 24px !important;
     padding-right: 24px !important;
   }
+
+  .schedule-screen__title {
+    font-size: 36px !important;
+  }
 }
