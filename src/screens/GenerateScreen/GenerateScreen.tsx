@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 const GenerateScreen = () => {
   return (
     <div className="w-full min-h-full flex flex-col items-center justify-start max-w-[1400px] m-auto pt-[var(--navbar-height)]">
-      <div className="flex flex-col items-center justify-center w-full mt-16">
+      <div className="flex flex-col items-center justify-center w-full pb-16">
         <a className="flex items-center mb-10" href="/">
           <img className="w-[48px] h-[48px] mb-[8px]" src={logo} />
           <TypographyH1 className="ml-[18px] text-5xl text-foreground font-semibold">

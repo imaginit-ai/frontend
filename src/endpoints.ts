@@ -18,21 +18,25 @@ export async function generateVideo(
   prompt: string
 ): Promise<FragileResponse<VideoData>> {
   try {
-    const res = await fetch(GENERATE_VIDEO_URL(), {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userID,
-        prompt,
-      }),
-    });
-    if (!res.ok) {
-      throw new Error("Failed to generate video");
-    }
-    const videoData = (await res.json()) as VideoData;
-    return { data: videoData, success: true };
+    // const res = await fetch(GENERATE_VIDEO_URL(), {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     userID,
+    //     prompt,
+    //   }),
+    // });
+    // if (!res.ok) {
+    //   throw new Error("Failed to generate video");
+    // }
+    // const videoData = (await res.json()) as VideoData;
+    // return { data: videoData, success: true };
+    return {
+      data: { videoURL: "/demos/Derivatives.mp4" },
+      success: true,
+    };
   } catch (error) {
     handleError(error, "Failed to generate video", "Please try again later.");
   }

@@ -14,8 +14,8 @@ export const JoinWaitlist = () => {
         supercharge your learning.
       </TypographyH2>
       <TypographyH3 className="landing__subheading text-center font-poppins text-[20px] opacity-40 px-[100px]">
-        Join the waitlist for early access or generate up to 3 experimental
-        videos now for free.
+        Join the waitlist now for early access to the most powerful visual
+        learning platform.
       </TypographyH3>
       <div className="mt-8 w-full flex justify-center items-center">
         <Button

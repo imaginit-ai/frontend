@@ -2,10 +2,9 @@ import { useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
-import { AlertCircle, InfoIcon, PlayIcon } from "lucide-react";
+import { AlertCircle, PlayIcon } from "lucide-react";
 import { Skeleton } from "../ui/skeleton";
 import { VideoCreatorState, VideoData } from "@/types";
-import ReactPlayer from "react-player/lazy";
 import { TypographyP } from "../ui/typography";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -43,8 +42,9 @@ const VideoCreator = () => {
   };
 
   return (
-    <div className="glass rounded-3xl flex flex-col w-3/4 p-10 transition-all duration-300">
-      <Alert>
+    <div className="w-3/4">
+      <div className="glass rounded-xl flex flex-col w-full p-6 transition-all duration-300">
+        {/* <Alert className="mb-5">
         <InfoIcon className="h-4 w-4" />
         <AlertTitle>
           You have {quota !== 1 ? `${quota} videos` : `${quota} video`}{" "}
@@ -54,80 +54,78 @@ const VideoCreator = () => {
           Due to high demand, you can temporarily generate up to 5 videos a day
           for free.
         </AlertDescription>
-      </Alert>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-row gap-4 mt-5"
-        >
-          <FormField
-            control={form.control}
-            name="prompt"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormControl>
-                  <Input
-                    placeholder="Ask me to explain anything..."
-                    autoComplete="off"
-                    {...field}
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <Button
-            className="icon-button"
-            type="submit"
-            disabled={
-              !watchPromptInput || state === VideoCreatorState.GeneratingVideo
-            }
+      </Alert> */}
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex flex-row gap-4"
           >
-            Generate
-            <PlayIcon className="mb-[1px] ml-2" size={16} />
-          </Button>
-        </form>
-      </Form>
-      <Skeleton
-        className="w-full rounded-md aspect-video transition-all max-h:duration-300"
-        style={{
-          maxHeight:
-            state === VideoCreatorState.GeneratingVideo ? "1000px" : "0px",
-          marginTop:
-            state === VideoCreatorState.GeneratingVideo ? "20px" : "0px",
-          opacity: state === VideoCreatorState.GeneratingVideo ? 1 : 0,
-        }}
-      >
-        <div
-          className="w-full h-full flex justify-center items-center"
+            <FormField
+              control={form.control}
+              name="prompt"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormControl>
+                    <Input
+                      placeholder="Ask me to explain anything..."
+                      autoComplete="off"
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <Button
+              className="icon-button"
+              type="submit"
+              disabled={
+                !watchPromptInput || state === VideoCreatorState.GeneratingVideo
+              }
+            >
+              Generate
+              <PlayIcon className="mb-[1px] ml-2" size={16} />
+            </Button>
+          </form>
+        </Form>
+        <Skeleton
+          className="w-full rounded-md aspect-video transition-all max-h:duration-300"
           style={{
-            display:
-              state === VideoCreatorState.GeneratingVideo ? "flex" : "none",
+            maxHeight:
+              state === VideoCreatorState.GeneratingVideo ? "1000px" : "0px",
+            marginTop:
+              state === VideoCreatorState.GeneratingVideo ? "20px" : "0px",
+            opacity: state === VideoCreatorState.GeneratingVideo ? 1 : 0,
           }}
         >
-          <TypographyP className="text-center text-muted-foreground text-xl">
-            Generating video...
-          </TypographyP>
-        </div>
-      </Skeleton>
-      {state === VideoCreatorState.Error && (
-        <Alert variant="destructive">
-          <AlertCircle className="h-4 w-4" />
-          <AlertTitle>Failed to generate video</AlertTitle>
-          <AlertDescription>
-            An unexpected error occurred. Please try again later.
-          </AlertDescription>
-        </Alert>
-      )}
-      {state === VideoCreatorState.Idle && videoData?.videoURL && (
-        <div className="w-full flex justify-center items-center mt-5">
-          <ReactPlayer
-            controls={true}
-            url={videoData?.videoURL}
-            width={"100%"}
-            height={"fit-content"}
+          <div
+            className="w-full h-full flex justify-center items-center"
             style={{
-              aspectRatio: "854/480",
+              display:
+                state === VideoCreatorState.GeneratingVideo ? "flex" : "none",
             }}
+          >
+            <TypographyP className="text-center text-muted-foreground text-xl">
+              Generating video...
+            </TypographyP>
+          </div>
+        </Skeleton>
+        {state === VideoCreatorState.Error && (
+          <Alert variant="destructive">
+            <AlertCircle className="h-4 w-4" />
+            <AlertTitle>Failed to generate video</AlertTitle>
+            <AlertDescription>
+              An unexpected error occurred. Please try again later.
+            </AlertDescription>
+          </Alert>
+        )}
+      </div>
+      {state === VideoCreatorState.Idle && videoData?.videoURL && (
+        <div className="w-full flex justify-center items-center mt-5 overflow-hidden rounded-md glass">
+          <video
+            className="w-full rounded-md"
+            src={videoData.videoURL}
+            // controls={true}
+            controls={false}
           />
         </div>
       )}
