@@ -13,7 +13,7 @@ const LearnMore = () => {
   const isInView = useInView(containerRef, { amount: 0.4, once: true });
   return (
     <div
-      className="learn-more w-full flex flex-col gap-[32px] scroll-mt-[100px] pb-40"
+      className="learn-more w-full flex flex-col gap-[32px] scroll-mt-[100px] pb-28 md:pb-40"
       id="learn-more"
       ref={containerRef}
     >

@@ -46,7 +46,7 @@ const LandingScreen = () => {
   const thumbnails = [Thumbnail1, Thumbnail2, Thumbnail3];
   const demoVideoPrompts = [
     "What are derivatives?",
-    "Explain how blockchain works",
+    "Explain blockchain",
     "Explain the EM Algorithm",
   ];
 

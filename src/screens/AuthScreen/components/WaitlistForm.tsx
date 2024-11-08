@@ -109,9 +109,9 @@ export const WaitlistForm = () => {
     );
     if (signupRes.success) {
       toast({
-        variant: "default",
-        title: "Success!",
-        description: "You have successfully joined the waitlist.",
+        variant: "success",
+        title: "Thank you for signing up!",
+        description: "You have been added to the waitlist.",
       });
       setWaitlistUserData(signupRes.data);
     }
