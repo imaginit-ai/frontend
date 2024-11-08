@@ -20,8 +20,8 @@ const ScheduleDemoScreen = () => {
     })();
   }, []);
   return (
-    <div className="schedule-screen w-full min-h-full flex flex-col justify-center items-center px-[100px] max-w-[1400px] m-auto pt-[var(--navbar-height)]">
-      <TypographyH1 className="schedule-screen__title text-center text-3xl sm:text-5xl mt-16 leading-[3.2rem]">
+    <div className="schedule-screen w-full min-h-full flex flex-col justify-start items-center px-[100px] max-w-[1400px] m-auto pt-[var(--navbar-height)]">
+      <TypographyH1 className="schedule-screen__title text-center text-3xl sm:text-5xl mt-6 sm:mt-10 leading-[3.2rem]">
         interested? <a className="whitespace-nowrap">let's talk.</a>
       </TypographyH1>
       <div className="min-h-36 mt-10 mb-10 w-full">

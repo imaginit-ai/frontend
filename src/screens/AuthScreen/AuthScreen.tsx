@@ -12,8 +12,11 @@ const AuthScreen = () => {
           className="flex items-center justify-center sm:justify-start"
           href="/"
         >
-          <img className="w-[30px] h-[30px] mb-[5px]" src={logo} />
-          <TypographyH2 className="ml-[8px] text-foreground font-semibold">
+          <img
+            className="w-[20px] h-[20px] mb-[4px] sm:w-[30px] sm:h-[30px] sm:mb-[5px]"
+            src={logo}
+          />
+          <TypographyH2 className="text-xl ml-[4px] sm:text-3xl sm:ml-[8px] text-foreground font-semibold">
             imaginit
           </TypographyH2>
         </a>

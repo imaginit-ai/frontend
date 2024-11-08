@@ -129,15 +129,17 @@ export const WaitlistForm = () => {
     return (
       <FormLabel className="text-left flex items-center justify-start">
         {label}
-        <p className="ml-2 text-[12px] opacity-50">{"(optional)"}</p>
+        <p className="ml-2 text-[12px] opacity-50 hidden sm:block">
+          {"(optional)"}
+        </p>
       </FormLabel>
     );
   };
 
   return (
     <>
-      <div className="auth__header flex flex-col gap-5">
-        <TypographyH1 className="text-3xl text-center sm:text-5xl sm:text-left">
+      <div className="auth__header flex flex-col gap-3 sm:gap-5">
+        <TypographyH1 className="text-[30px] text-center sm:text-5xl sm:text-left">
           join the waitlist.
         </TypographyH1>
         <TypographyH3 className="text-sm text-center sm:text-lg opacity-50 sm:text-left">

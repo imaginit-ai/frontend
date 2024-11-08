@@ -75,7 +75,7 @@ const Navbar = () => {
         <div className="web-menu flex h-full items-center justify-between px-[100px] w-full max-w-[1400px]">
           <a className="flex items-center" href="/">
             <img className="w-[24px] h-[24px] mb-[5px]" src={logo} />
-            <TypographyH3 className="ml-[10px] text-foreground font-semibold">
+            <TypographyH3 className="ml-[8px] text-foreground font-semibold">
               imaginit
             </TypographyH3>
           </a>
