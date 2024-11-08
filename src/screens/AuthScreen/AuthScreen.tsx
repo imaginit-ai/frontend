@@ -23,9 +23,9 @@ const AuthScreen = () => {
         </a>
         <WaitlistForm />
       </div>
-      <div className="as__right flex w-full min-h-full max-h-[100vh] justify-center items-center p-[16px]">
+      <div className="as__right flex w-full min-h-full max-h-[100vh] justify-center items-center p-[50px]">
         {/* <WatchingVideosImg className="max-w-[500px]" /> */}
-        <img src={GenerateScreenMockup} className="max-w-[500px]" />
+        <img src={GenerateScreenMockup} />
       </div>
     </div>
   );
