@@ -14,6 +14,7 @@
 
   .as__left {
     min-width: fit-content;
+    background: hsl(var(--background));
   }
 
 }

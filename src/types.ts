@@ -102,25 +102,6 @@ export enum VideoCreatorState {
   Error = "Error",
 }
 
-/**
- * 
- *   {
-    "amount_referred": 0,
-    "created_at": "2022-04-10_18-34-28",
-    "email": "example9911@example.com",
-    "priority": 4985,
-    "referral_link": "https://getwaitlist.com?ref_id=4F0BTBMAB",
-    "referral_token": "4F0BTBMAB",
-    "referred_by_signup_token": "REFTOKEN1",
-    "removed_date": null,
-    "removed_priority": null,
-    "uuid": "c60ff9f2-1a58-4551-87ea-414991184fba",
-    "verified": false,
-    "waitlist_id": 12345
-  }
- * 
- */
-
 export type WaitlistUser = {
   amount_referred: number;
   created_at: string;
@@ -145,4 +126,14 @@ export type WaitlistLocation = {
   longitude: number;
   IPv4: string;
   state: string;
+};
+
+export type VideoData = {
+  videoURL: string;
+};
+
+export type FragileResponse<T> = {
+  data?: T;
+  success: boolean;
+  message?: string;
 };

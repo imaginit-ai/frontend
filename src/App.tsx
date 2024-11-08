@@ -8,25 +8,29 @@ import ScheduleDemoScreen from "./screens/ScheduleDemoScreen/ScheduleDemoScreen"
 import AuthScreen from "./screens/AuthScreen/AuthScreen";
 import GenerateScreen from "./screens/GenerateScreen/GenerateScreen";
 import { ProtectedRoutes } from "./components/Routing/ProtectedRoutes";
+import { Toaster } from "./components/ui/toaster";
 
 function App() {
   return (
-    <BrowserRouter basename={"/"}>
-      <Navbar />
-      <Routes>
-        <Route path={SiteScreens.LANDING} element={<LandingScreen />} />
-        <Route
-          path={SiteScreens.SCHEDULE_DEMO}
-          element={<ScheduleDemoScreen />}
-        />
-        <Route path={SiteScreens.AUTH} element={<AuthScreen />} />
-        <Route element={<ProtectedRoutes />}>
-          <Route path={SiteScreens.GENERATE} element={<GenerateScreen />} />
-        </Route>
-        <Route path="*" element={<Navigate to={"/"} />} />
-      </Routes>
-      {/* <Footer /> */}
-    </BrowserRouter>
+    <>
+      <BrowserRouter basename={"/"}>
+        <Navbar />
+        <Routes>
+          <Route path={SiteScreens.LANDING} element={<LandingScreen />} />
+          <Route
+            path={SiteScreens.SCHEDULE_DEMO}
+            element={<ScheduleDemoScreen />}
+          />
+          <Route path={SiteScreens.AUTH} element={<AuthScreen />} />
+          <Route element={<ProtectedRoutes />}>
+            <Route path={SiteScreens.GENERATE} element={<GenerateScreen />} />
+          </Route>
+          <Route path="*" element={<Navigate to={"/"} />} />
+        </Routes>
+        {/* <Footer /> */}
+      </BrowserRouter>
+      <Toaster />
+    </>
   );
 }
 

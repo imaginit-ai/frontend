@@ -1,90 +1,92 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
-import { AlertCircle, PlayIcon } from "lucide-react";
+import { AlertCircle, InfoIcon, PlayIcon } from "lucide-react";
 import { Skeleton } from "../ui/skeleton";
-import { ExceededQuotaDialog } from "../CustomDialogs/ExceededQuotaDialog";
-import { VideoCreatorState } from "@/types";
+import { VideoCreatorState, VideoData } from "@/types";
 import ReactPlayer from "react-player/lazy";
 import { TypographyP } from "../ui/typography";
-import { generateVideo } from "@/utils/backendUtils";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Form, FormControl, FormField, FormItem } from "../ui/form";
+import { generateVideo } from "@/endpoints";
+
+const formSchema = z.object({
+  prompt: z.string().min(1),
+});
 
 const VideoCreator = () => {
   const [prompt, setPrompt] = useState<string>("");
-  const [video, setVideo] = useState<string>("");
-  const [quota, setQuota] = useState<number | undefined>();
+  const [videoData, setVideoData] = useState<VideoData | undefined>();
+  const [quota, setQuota] = useState<number>(5);
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [state, setState] = useState<VideoCreatorState>(VideoCreatorState.Idle);
 
-  const handleGenerateBtn = async () => {
-    if (quota && quota > 0) {
-      updateQuota(quota - 1);
-      setState(VideoCreatorState.GeneratingVideo);
-      const res = await generateVideo(prompt);
-      setVideo(res);
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      prompt: "",
+    },
+  });
+
+  const watchPromptInput = form.watch("prompt");
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setState(VideoCreatorState.GeneratingVideo);
+    const res = await generateVideo("", prompt);
+    if (res.success) {
+      setVideoData(res.data);
       setState(VideoCreatorState.Idle);
-    } else {
-      setOpenDialog(true);
     }
   };
-
-  /********* TEMPORARY USE OF LOCAL STORAGE. CHANGE LATER ******* */
-  const updateQuota = (newQuota: number) => {
-    setQuota(newQuota);
-    localStorage.setItem("quota", newQuota.toString());
-  };
-
-  useEffect(() => {
-    const quota = localStorage.getItem("quota");
-    if (quota) {
-      setQuota(parseInt(quota));
-    } else {
-      setQuota(3);
-      localStorage.setItem("quota", "3");
-    }
-  }, []);
 
   return (
-    <div className="glass flex flex-col w-3/4 p-10 transition-all duration-300">
+    <div className="glass rounded-3xl flex flex-col w-3/4 p-10 transition-all duration-300">
       <Alert>
-        <AlertCircle className="h-4 w-4" />
+        <InfoIcon className="h-4 w-4" />
         <AlertTitle>
           You have {quota !== 1 ? `${quota} videos` : `${quota} video`}{" "}
           remaining.
         </AlertTitle>
         <AlertDescription>
-          Due to high demand, you can temporarily generate up to 3 videos for
-          free. Join our waitlist for early access to more videos.
+          Due to high demand, you can temporarily generate up to 5 videos a day
+          for free.
         </AlertDescription>
       </Alert>
-      <div className="flex flex-row gap-4 mt-5">
-        <Input
-          type="text"
-          placeholder="Explain blockchain"
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-        />
-        <ExceededQuotaDialog
-          open={openDialog}
-          onOpenChange={(open) => {
-            if (quota && quota <= 0) {
-              setOpenDialog(open);
-            }
-          }}
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-row gap-4 mt-5"
         >
+          <FormField
+            control={form.control}
+            name="prompt"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormControl>
+                  <Input
+                    placeholder="Ask me to explain anything..."
+                    autoComplete="off"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
           <Button
             className="icon-button"
-            onClick={() => handleGenerateBtn()}
+            type="submit"
             disabled={
-              prompt === "" || state === VideoCreatorState.GeneratingVideo
+              !watchPromptInput || state === VideoCreatorState.GeneratingVideo
             }
           >
             Generate
             <PlayIcon className="mb-[1px] ml-2" size={16} />
           </Button>
-        </ExceededQuotaDialog>
-      </div>
+        </form>
+      </Form>
       <Skeleton
         className="w-full rounded-md aspect-video transition-all max-h:duration-300"
         style={{
@@ -116,11 +118,11 @@ const VideoCreator = () => {
           </AlertDescription>
         </Alert>
       )}
-      {state === VideoCreatorState.Idle && video !== "" && (
+      {state === VideoCreatorState.Idle && videoData?.videoURL && (
         <div className="w-full flex justify-center items-center mt-5">
           <ReactPlayer
             controls={true}
-            url={video}
+            url={videoData?.videoURL}
             width={"100%"}
             height={"fit-content"}
             style={{

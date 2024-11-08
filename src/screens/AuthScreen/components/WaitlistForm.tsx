@@ -26,6 +26,7 @@ import WaitListPosition from "./WaitListPosition";
 import { Textarea } from "@/components/ui/textarea";
 import { browserName } from "react-device-detect";
 import { WaitlistUser } from "@/types";
+import { toast } from "@/hooks/use-toast";
 
 const waitlistSchema = z
   .object({
@@ -86,6 +87,8 @@ export const WaitlistForm = () => {
     const locationData = await fetchGeoLocation();
 
     const signupRes = await createSignup(
+      values.fullName.split(" ")[0],
+      values.fullName.split(" ")[1] || "",
       values.email,
       [
         {
@@ -104,8 +107,14 @@ export const WaitlistForm = () => {
         ...locationData,
       }
     );
-    console.log(signupRes);
-    setWaitlistUserData(signupRes);
+    if (signupRes.success) {
+      toast({
+        variant: "default",
+        title: "Success!",
+        description: "You have successfully joined the waitlist.",
+      });
+      setWaitlistUserData(signupRes.data);
+    }
   };
 
   const formLabel = (label: string, required?: boolean) => {

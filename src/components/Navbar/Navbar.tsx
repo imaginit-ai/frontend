@@ -13,7 +13,6 @@ import "./Navbar.css";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
 import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 const actionBtnStyle = cn(buttonVariants({ variant: "accent", size: "sm" }));
 
@@ -46,12 +45,6 @@ export const getNavbarLinkElement = (link: SiteMapLink, index: number) => {
 
 const Navbar = () => {
   const location = useLocation();
-  const [hide, setHide] = useState(false);
-
-  useEffect(() => {
-    setHide(updateHideNavbar());
-  }, [location.pathname]);
-
   const updateHideNavbar = (): boolean => {
     const slug = location.pathname as keyof typeof SiteMap;
     return SiteMap[slug]?.navbarSettings?.showNavbar === false ? true : false;
@@ -96,7 +89,6 @@ const Navbar = () => {
             </NavigationMenuList>
           </NavigationMenu>
         </div>
-        {/* <Separator /> */}
       </div>
       <MobileNavbar hide={updateHideNavbar()} links={extractLinks()} />
     </>

@@ -14,9 +14,12 @@
  * 
  */
 
-import { WaitlistLocation, WaitlistUser } from "@/types";
+import { FragileResponse, WaitlistLocation, WaitlistUser } from "@/types";
+import { handleError } from "./errorUtils";
 
 export const createSignup = async (
+  first_name: string,
+  last_name: string,
   email: string,
   answers: {
     question_value: string;
@@ -25,31 +28,43 @@ export const createSignup = async (
   }[],
   metadata: any,
   referral_link?: string
-): Promise<WaitlistUser> => {
-  const response = await fetch(`https://api.getwaitlist.com/api/v1/signup`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email,
-      waitlist_id: 21884,
-      answers,
-      referral_link,
-      metadata,
-    }),
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to signup");
+): Promise<FragileResponse<WaitlistUser>> => {
+  try {
+    const response = await fetch(`https://api.getwaitlist.com/api/v1/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        first_name,
+        last_name,
+        email,
+        waitlist_id: 21884,
+        answers,
+        referral_link,
+        metadata,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to create waitlist signup");
+    }
+    const data = (await response.json()) as WaitlistUser;
+    return {
+      data,
+      success: true,
+    };
+  } catch (error) {
+    handleError(error);
+    return { success: false };
   }
-  return (await response.json()) as WaitlistUser;
 };
 
 export const fetchGeoLocation = async (): Promise<WaitlistLocation | {}> => {
   try {
-    const locationRes = await fetch("https://geolocation-db.com/json/");
-    const locationData = (await locationRes.json()) as WaitlistLocation;
+    const locationRes = await fetch("https://geolocation-db.com/json/").catch(
+      () => {}
+    );
+    const locationData = (await locationRes?.json()) as WaitlistLocation;
     return locationData;
   } catch (error) {
     return {};

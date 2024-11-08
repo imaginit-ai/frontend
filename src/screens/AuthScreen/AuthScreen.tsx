@@ -6,8 +6,8 @@ import WatchingVideosImg from "../../assets/illustrations/watching-videos.svg?re
 
 const AuthScreen = () => {
   return (
-    <div className="auth-screen min-h-full w-full flex flex-row bg-accent">
-      <div className="as__left flex min-w-[600px] w-full min-h-full flex-col px-[75px] pt-[50px] pb-[18px] shadow-md bg-background gap-10 sm:gap-16">
+    <div className="auth-screen min-h-full w-full flex flex-row bg-background">
+      <div className="as__left flex min-w-[600px] w-full min-h-full flex-col px-[75px] pt-[50px] pb-[18px] glass gap-10 sm:gap-16">
         <a
           className="flex items-center justify-center sm:justify-start"
           href="/"
