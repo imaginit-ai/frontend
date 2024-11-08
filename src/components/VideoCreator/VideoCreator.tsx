@@ -8,7 +8,7 @@ import { ExceededQuotaDialog } from "../CustomDialogs/ExceededQuotaDialog";
 import { VideoCreatorState } from "@/types";
 import ReactPlayer from "react-player/lazy";
 import { TypographyP } from "../ui/typography";
-import { generateVideo } from "@/backendUtils";
+import { generateVideo } from "@/utils/backendUtils";
 
 const VideoCreator = () => {
   const [prompt, setPrompt] = useState<string>("");

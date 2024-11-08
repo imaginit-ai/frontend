@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button";
 import { TypographyH1, TypographyH3 } from "@/components/ui/typography";
 import { ArrowRight, Calendar } from "lucide-react";
 import NavyLogo from "../../assets/logos/navy.png";
-import { SiteMap } from "@/types";
-import LearnMore from "./sections/LearnMore";
+import { SiteScreens } from "@/types";
+import LearnMore from "./components/LearnMore";
 import { useNavigate } from "react-router-dom";
-import { JoinWaitlist } from "./sections/JoinWaitlist";
+import { JoinWaitlist } from "./components/JoinWaitlist";
 
 const LandingScreen = () => {
   const navigate = useNavigate();
@@ -42,17 +42,17 @@ const LandingScreen = () => {
           <Button
             className="icon-button text-[12px] mr-4 px-3 h-[36px] sm:h-9 sm:px-3 sm:text-sm sm:mr-8"
             variant={"outline"}
-            onClick={() => navigate(SiteMap.ScheduleDemoScreen.slug)}
+            onClick={() => navigate(SiteScreens.SCHEDULE_DEMO)}
           >
-            <Calendar className="mr-2" size={16} />
+            <Calendar className="mr-2 mb-[1.5px]" size={16} />
             Schedule Demo
           </Button>
           {/* </Button> */}
           <Button
             className="icon-button text-[12px] px-3 h-[36px] sm:h-9 sm:px-3 sm:text-sm sm:mr-8"
-            onClick={() => navigate(SiteMap.GenerateScreen.slug)}
+            onClick={() => navigate(SiteScreens.AUTH)}
           >
-            Try Imaginit free
+            Join Waitlist
             <div className="relative w-[18px] h-[18px]">
               <ArrowRight className="icon-button-icon" size={18} />
             </div>

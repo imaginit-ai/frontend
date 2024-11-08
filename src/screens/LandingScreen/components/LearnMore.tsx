@@ -12,7 +12,7 @@ const LearnMore = () => {
       className="learn-more w-full flex flex-col gap-[32px] scroll-mt-[100px] pb-24 "
       id="learn-more"
     >
-      <div className="hiw__section glass md:flex-col">
+      <div className="hiw__section glass rounded-[34px] md:flex-col">
         <TypographyH2 className="hiw__section-left">
           you imagine it, we animate it.
         </TypographyH2>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Navbar.css";
-import { NavbarLink, SiteMap } from "@/types";
+import { SiteMapLink } from "@/types";
 import { TypographyH3 } from "../ui/typography";
 import logo from "../../assets/logos/navy.png";
 import {
@@ -14,7 +14,8 @@ import { Separator } from "../ui/separator";
 import { getNavbarLinkElement } from "./Navbar";
 
 type MobileNavbarProps = {
-  links: NavbarLink[];
+  hide: boolean;
+  links: SiteMapLink[];
 };
 
 const MobileNavbar = (props: MobileNavbarProps) => {
@@ -30,9 +31,19 @@ const MobileNavbar = (props: MobileNavbarProps) => {
     }
   }, [open]);
 
+  const extractActionLinks = () => {
+    const actionLinks = props.links.filter(
+      (link) => link.navbarSettings?.style === "action"
+    );
+    return actionLinks;
+  };
+
   return (
     <>
-      <div className="navbar mobile h-navbar-height w-full flex items-center flex-col backdrop-blur-[14px] fixed top-0">
+      <div
+        className="navbar mobile h-navbar-height w-full flex items-center flex-col bg-background fixed top-0"
+        style={{ display: props.hide ? "none" : "" }}
+      >
         <div className="mobile-menu">
           <a className="flex items-center" href="/">
             <img className="w-[24px] h-[24px] mb-[5px]" src={logo} />
@@ -43,15 +54,18 @@ const MobileNavbar = (props: MobileNavbarProps) => {
           <div className="flex flex-row justify-center items-center">
             <NavigationMenu>
               <NavigationMenuList>
-                <NavigationMenuLink
-                  className={
-                    actionBtnStyle +
-                    " mobile-menu__action-btn text-[12px] mr-2 px-2 h-[32px] sm:h-9 sm:px-3 sm:text-sm sm:mr-8"
-                  }
-                  href={SiteMap.GenerateScreen.slug}
-                >
-                  {SiteMap.GenerateScreen.displayName}
-                </NavigationMenuLink>
+                {extractActionLinks().map((link, index) => (
+                  <NavigationMenuLink
+                    key={index}
+                    className={
+                      actionBtnStyle +
+                      " mobile-menu__action-btn text-[12px] mr-2 px-2 h-[32px] sm:h-9 sm:px-3 sm:text-sm sm:mr-8"
+                    }
+                    href={link.slug}
+                  >
+                    {link.displayName}
+                  </NavigationMenuLink>
+                ))}
               </NavigationMenuList>
             </NavigationMenu>
             <button
@@ -70,7 +84,11 @@ const MobileNavbar = (props: MobileNavbarProps) => {
 
       <NavigationMenu>
         <NavigationMenuList>
-          <div className={"mobile-menu-content" + (open ? " active" : "")}>
+          <div
+            className={
+              "mobile-menu-content bg-background " + (open ? " active" : "")
+            }
+          >
             {props.links.map(
               (link, index) =>
                 index !== props.links.length - 1 && (
@@ -91,6 +109,7 @@ const MobileNavbar = (props: MobileNavbarProps) => {
         className={
           "mobile-menu-overlay bg-primary/70" + (open ? " active" : "")
         }
+        style={{ display: props.hide ? "none" : "" }}
         onClick={() => setOpen(false)}
       />
     </>

@@ -1,9 +1,9 @@
 import { TypographyH2, TypographyH3 } from "@/components/ui/typography";
 import "./JoinWaitlist.css";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { SiteMap } from "@/types";
+import { SiteScreens } from "@/types";
 
 export const JoinWaitlist = () => {
   const navigate = useNavigate();
@@ -21,16 +21,16 @@ export const JoinWaitlist = () => {
         <Button
           className="icon-button text-[12px] mr-4 px-3 h-[36px] sm:h-9 sm:px-3 sm:text-sm sm:mr-8"
           variant={"outline"}
-          onClick={() => window.open("https://getwaitlist.com/waitlist/21884")}
+          onClick={() => navigate(SiteScreens.SCHEDULE_DEMO)}
         >
-          {/* <Calendar className="mr-2" size={16} /> */}
-          Join Waitlist
+          <Calendar className="mr-2 mb-[1.5px]" size={16} />
+          Schedule Demo
         </Button>
         <Button
           className="icon-button text-[12px] px-3 h-[36px] sm:h-9 sm:px-3 sm:text-sm sm:mr-8"
-          onClick={() => navigate(SiteMap.GenerateScreen.slug)}
+          onClick={() => navigate(SiteScreens.AUTH)}
         >
-          Try Imaginit free
+          Join Waitlist
           <div className="relative w-[18px] h-[18px]">
             <ArrowRight className="icon-button-icon" size={18} />
           </div>

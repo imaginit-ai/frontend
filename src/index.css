@@ -6,12 +6,12 @@
   height: 100vh;
   /* width: 100vw; */
   position: relative;
+  /* overflow: hidden; */
 }
 
 @layer base {
   :root {
     --background: 198 26% 94%;
-    /* --background: 216.11 26% 95%; */
     --foreground: 220 29% 14%;
     --card: 204 22% 97%;
     --card-foreground: 220 29% 14%;
@@ -23,9 +23,8 @@
     --secondary-foreground: 220 29% 14%;
     --muted: 198 26% 94%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    /* --accent: 10 88% 63%; */
     --accent: 216.11 86.83% 52.35%;
-    /* --accent-background: 10 88% 94%; */
+    /* #1C70EF */
     --accent-background: 216.11 86.83% 95%;
     --accent-foreground: 204 22% 97%;
     --destructive: 0 84.2% 60.2%;
@@ -85,7 +84,6 @@
 @layer components {
   .glass {
     background: hsl(var(--card));
-    border-radius: 24px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);

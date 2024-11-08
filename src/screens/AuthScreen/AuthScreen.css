@@ -1,0 +1,26 @@
+@media screen and (max-width: 1024px) {
+
+  .as__right {
+    display: none;
+  }
+
+  .auth-screen {
+    justify-content: center;
+  }
+
+  .as__left {
+    padding: 50px 18vw 18px 18vw !important;
+  }
+
+  .as__left {
+    min-width: fit-content;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+
+  .as__left {
+    padding: 50px 36px 18px 36px !important;
+  }
+}
