@@ -10,7 +10,7 @@ import { useRef } from "react";
 
 const LearnMore = () => {
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { amount: 0.4, once: true });
+  const isInView = useInView(containerRef, { amount: 0.3, once: true });
   return (
     <div
       className="learn-more w-full flex flex-col gap-[32px] scroll-mt-[100px] pb-28 md:pb-40"
@@ -72,8 +72,8 @@ const LearnMore = () => {
             </div>
             <TypographyH4>Instant results</TypographyH4>
             <TypographyP className="mt-0 opacity-50 leading-7">
-              Get your video in minutes, not hours. Share it with your friends
-              or use it in your next presentation.
+              Accelerate your learning and retain more information with videos
+              made in minutes.
             </TypographyP>
           </motion.div>
         </div>

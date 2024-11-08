@@ -4,9 +4,8 @@ import {
   TypographyH1,
   TypographyH2,
   TypographyH3,
-  TypographyP,
 } from "@/components/ui/typography";
-import { ArrowRight, Calendar, PlayIcon } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
 import NavyLogo from "../../assets/logos/navy.png";
 import { SiteScreens } from "@/types";
 import LearnMore from "./components/LearnMore";
@@ -127,26 +126,14 @@ const LandingScreen = () => {
         <img src={generateScreen} className="w-full" />
       </motion.div>
       <LearnMore />
-      <div className="demo-video-section w-full flex flex-row items-center gap-24 mb-40">
-        <div className="w-full flex flex-col items-start justify-start gap-12">
+      <div className="demo-video-section w-full flex flex-row items-center gap-20 mb-36 md:mb-40">
+        <div className="w-full flex flex-col items-start justify-start gap-9 relative self-start md:gap-12">
           <TypographyH2 className="demo-title text-center font-semibold text-[36px] md:text-left md:text-[46px] leading-[3.6rem]">
             no matter the topic, we've got you covered.
           </TypographyH2>
-          <div className="w-full glass p-6 rounded-xl h-fit">
-            <div className="flex flex-row gap-4">
-              <div className="flex h-10 w-full rounded-md border border-border bg-card px-3 py-2 text-sm">
-                <TypographyP className="mt-[2px] whitespace-nowrap">
-                  {demoVideoPrompts[current - 1]}
-                </TypographyP>
-              </div>
-              <div className={actionBtnStyle + " mock-button"}>
-                <TypographyP className="text-primary-foreground">
-                  Generate
-                </TypographyP>
-                <PlayIcon className="mb-[1px] ml-2" size={16} />
-              </div>
-            </div>
-          </div>
+          <p className="message-bubble receive">
+            {demoVideoPrompts[current - 1]}
+          </p>
         </div>
         <div className="w-full flex flex-col items-center justify-center h-full">
           <Carousel className="w-full h-full" setApi={setApi}>
