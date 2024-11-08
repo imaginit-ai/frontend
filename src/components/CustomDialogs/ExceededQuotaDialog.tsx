@@ -7,7 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { SiteMap } from "@/types";
+import { SiteScreens } from "@/types";
 import { ArrowRight, Calendar } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -43,7 +43,7 @@ export const ExceededQuotaDialog = (props: ExceededQuotaDialogProps) => {
           </Button>
           <Button
             className="icon-button text-[12px] px-3 h-[36px] sm:h-9 sm:px-3 sm:text-sm sm:mr-8"
-            onClick={() => navigate(SiteMap.ScheduleDemoScreen.slug)}
+            onClick={() => navigate(SiteScreens.SCHEDULE_DEMO)}
           >
             Join Waitlist
             <div className="relative w-[18px] h-[18px]">
