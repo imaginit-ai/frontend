@@ -69,7 +69,7 @@
 }
 
 .landing-video .react-player__shadow {
-  transform: scale(2) !important;
+  transform: scale(1.5) !important;
   transform-origin: center;
 }
 
@@ -216,11 +216,11 @@
   }
 
   .landing-slider-control.prev {
-    left: 16px !important;
+    left: 12px !important;
   }
 
   .landing-slider-control.next {
-    left: calc(100% - 16px) !important;
+    left: calc(100% - 12px) !important;
   }
 }
 
