@@ -11,7 +11,7 @@ import { SiteScreens } from "@/types";
 import LearnMore from "./components/LearnMore";
 import { useNavigate } from "react-router-dom";
 import { JoinWaitlist } from "./components/JoinWaitlist";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import {
   Carousel,
@@ -45,6 +45,7 @@ const LandingScreen = () => {
   const [count, setCount] = useState(0);
   const demoVideos = [DemoVideo1, DemoVideo2, DemoVideo3];
   const thumbnails = [Thumbnail1, Thumbnail2, Thumbnail3];
+  const isInView = useInView(showcaseVideoRef, { amount: 0.3, once: true });
 
   const demoVideoPrompts = [
     "Explain simple harmonic motion.",
@@ -134,7 +135,15 @@ const LandingScreen = () => {
       </div>
       <motion.div
         // style={{ scale }}
-        className="landing-video relative mb-10 w-full"
+        style={{
+          opacity: isInView ? 1 : 0,
+          filter: isInView ? "blur(0px)" : "blur(10px)",
+          transform: isInView
+            ? "translateY(0px) scale(1)"
+            : "translateY(64px) scale(0.9)",
+          transition: "all 0.5s ease-in-out",
+        }}
+        className="landing-video relative mb-20 w-full"
         ref={showcaseVideoRef}
       >
         <img src={generateScreen} className="w-full" />

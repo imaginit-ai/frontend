@@ -71,6 +71,7 @@
 .landing-video .react-player__shadow {
   transform: scale(1.5) !important;
   transform-origin: center;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1024px) {
