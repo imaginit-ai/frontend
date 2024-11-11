@@ -11,7 +11,6 @@ import { SiteScreens } from "@/types";
 import LearnMore from "./components/LearnMore";
 import { useNavigate } from "react-router-dom";
 import { JoinWaitlist } from "./components/JoinWaitlist";
-import generateScreen from "../../assets/generate-screen-mockup.png";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -22,14 +21,17 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import DemoVideo1 from "../../assets/demos/Derivatives.mp4";
-import DemoVideo2 from "../../assets/demos/Blockchain.mp4";
-import DemoVideo3 from "../../assets/demos/EMAlgorithm.mp4";
-import Thumbnail1 from "../../assets/thumbnail1.png";
-import Thumbnail2 from "../../assets/thumbnail2.png";
-import Thumbnail3 from "../../assets/thumbnail3.png";
+import LandingVideo from "../../assets/ImaginitLandingVideo.mp4";
+import DemoVideo1 from "../../assets/demos/SimpleHarmonicMotion.mp4";
+import DemoVideo2 from "../../assets/demos/LargeLanguageModels.mp4";
+import DemoVideo3 from "../../assets/demos/AcidBaseReactions.mp4";
+import LandingThumbnail from "../../assets/landing-thumbnail.png";
+import Thumbnail1 from "../../assets/demos/thumbnails/thumbnail1.png";
+import Thumbnail2 from "../../assets/demos/thumbnails/thumbnail2.png";
+import Thumbnail3 from "../../assets/demos/thumbnails/thumbnail3.png";
 import { cn } from "@/lib/utils";
 import ReactPlayer from "react-player";
+import generateScreen from "../../assets/generate-screen-mockup.png";
 
 const LandingScreen = () => {
   const navigate = useNavigate();
@@ -38,15 +40,16 @@ const LandingScreen = () => {
   const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.9]);
   const [api, setApi] = useState<CarouselApi>();
   const videoRef = useRef<HTMLDivElement>(null);
-  const playerRef = useRef<ReactPlayer>(null);
+  const showcaseVideoRef = useRef<HTMLDivElement>(null);
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
   const demoVideos = [DemoVideo1, DemoVideo2, DemoVideo3];
   const thumbnails = [Thumbnail1, Thumbnail2, Thumbnail3];
+
   const demoVideoPrompts = [
-    "What are derivatives?",
-    "Explain blockchain",
-    "Explain the EM Algorithm",
+    "Explain simple harmonic motion.",
+    "How do LLMs work?",
+    "Explain acid-base Reactions.",
   ];
 
   const actionBtnStyle = cn(
@@ -57,6 +60,13 @@ const LandingScreen = () => {
   const getDemoVideoHeight = () => {
     if (videoRef.current && videoRef.current.clientWidth) {
       return videoRef.current.clientWidth * (9 / 16);
+    }
+    return 275;
+  };
+
+  const getShowcaseVideoHeight = () => {
+    if (showcaseVideoRef.current && showcaseVideoRef.current.clientWidth) {
+      return showcaseVideoRef.current.clientWidth * (9 / 16);
     }
     return 275;
   };
@@ -122,8 +132,30 @@ const LandingScreen = () => {
           </Button>
         </div>
       </div>
-      <motion.div style={{ scale }} className="relative mb-10">
+      <motion.div
+        // style={{ scale }}
+        className="landing-video relative mb-10 w-full"
+        ref={showcaseVideoRef}
+      >
         <img src={generateScreen} className="w-full" />
+        <ReactPlayer
+          url={LandingVideo}
+          controls={true}
+          width={"100%"}
+          height={`calc(${getShowcaseVideoHeight()}px + 3.7vw)`}
+          light={LandingThumbnail}
+          playing={true}
+          style={{
+            overflow: "hidden",
+            position: "absolute",
+            top: "calc(3px - 2.335vw)",
+            transform: "scale(0.77)",
+            left: "0.15vw",
+            transformOrigin: "center",
+            border: "none !important",
+            outline: "none !important",
+          }}
+        />
       </motion.div>
       <LearnMore />
       <div className="demo-video-section w-full flex flex-row items-center gap-20 mb-36 md:mb-40">
@@ -136,7 +168,11 @@ const LandingScreen = () => {
           </p>
         </div>
         <div className="w-full flex flex-col items-center justify-center h-full">
-          <Carousel className="w-full h-full" setApi={setApi}>
+          <Carousel
+            className="w-full h-full"
+            setApi={setApi}
+            opts={{ loop: true }}
+          >
             <CarouselContent>
               {demoVideos.map((videoSrc, index) => (
                 <CarouselItem key={index}>
@@ -145,7 +181,6 @@ const LandingScreen = () => {
                       url={videoSrc}
                       controls
                       width={"100%"}
-                      ref={playerRef}
                       playing={current - 1 === index}
                       height={getDemoVideoHeight()}
                       light={thumbnails[index]}

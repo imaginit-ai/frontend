@@ -11,6 +11,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem } from "../ui/form";
 import { generateVideo } from "@/endpoints";
+import { Progress } from "../ui/progress";
 
 const formSchema = z.object({
   prompt: z.string().min(1),
@@ -22,6 +23,7 @@ const VideoCreator = () => {
   const [quota, setQuota] = useState<number>(5);
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [state, setState] = useState<VideoCreatorState>(VideoCreatorState.Idle);
+  const [progressValue, setProgressValue] = useState<number>(0);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -98,7 +100,7 @@ const VideoCreator = () => {
           }}
         >
           <div
-            className="w-full h-full flex justify-center items-center"
+            className="w-full h-full flex justify-center items-center flex-col"
             style={{
               display:
                 state === VideoCreatorState.GeneratingVideo ? "flex" : "none",
@@ -107,6 +109,10 @@ const VideoCreator = () => {
             <TypographyP className="text-center text-muted-foreground text-xl">
               Generating video...
             </TypographyP>
+            <Progress
+              value={progressValue}
+              className="w-[360px] h-[8px] mt-6"
+            />
           </div>
         </Skeleton>
         {state === VideoCreatorState.Error && (
@@ -124,8 +130,8 @@ const VideoCreator = () => {
           <video
             className="w-full rounded-md"
             src={videoData.videoURL}
-            // controls={true}
-            controls={false}
+            controls={true}
+            autoPlay={true}
           />
         </div>
       )}

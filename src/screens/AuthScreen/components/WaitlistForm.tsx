@@ -58,8 +58,11 @@ export const WaitlistForm = () => {
   const form = useForm<z.infer<typeof waitlistSchema>>({
     resolver: zodResolver(waitlistSchema),
     defaultValues: {
+      fullName: "",
       email: "",
-      userType: undefined,
+      userType: "",
+      otherType: "",
+      reason: "",
     },
   });
 
@@ -114,6 +117,7 @@ export const WaitlistForm = () => {
         description: "You have been added to the waitlist.",
       });
       setWaitlistUserData(signupRes.data);
+      form.reset();
     }
   };
 
