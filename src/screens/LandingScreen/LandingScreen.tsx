@@ -50,7 +50,7 @@ const LandingScreen = () => {
   const demoVideoPrompts = [
     "Explain simple harmonic motion.",
     "How do LLMs work?",
-    "Explain acid-base Reactions.",
+    "Explain acid-base reactions.",
   ];
 
   const actionBtnStyle = cn(
