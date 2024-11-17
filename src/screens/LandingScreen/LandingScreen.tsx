@@ -108,8 +108,9 @@ const LandingScreen = () => {
             </TypographyH1>
           </div>
           <TypographyH3 className="landing__subheading text-center font-poppins text-[22px] opacity-40 px-[100px]">
-            Learn visually with personalized, AI-generated animations for every
-            idea.
+            {
+              "Learn visually with personalized, AI-generated animations for every idea. [Staging]"
+            }
           </TypographyH3>
         </div>
         <div className="flex flex-row items-center justify-center">
