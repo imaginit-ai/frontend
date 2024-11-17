@@ -1,5 +1,6 @@
 import { FragileResponse, VideoData } from "./types";
 import { handleError } from "./utils/errorUtils";
+import axios from "axios";
 
 enum Backend {
   Local = import.meta.env.VITE_LOCAL_API_URL,
@@ -18,21 +19,21 @@ export async function generateVideo(
   prompt: string
 ): Promise<FragileResponse<VideoData>> {
   try {
-    const res = await fetch(GENERATE_VIDEO_URL(), {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+    const res = await axios.post(
+      GENERATE_VIDEO_URL(),
+      {
+        prompt: prompt,
       },
-      body: JSON.stringify({
-        prompt,
-      }),
-    });
-    if (!res.ok) {
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    if (res.status !== 200 || !res.data) {
       throw new Error("Failed to generate video");
     }
-    const videoData = (await res.json()) as VideoData;
-    return { data: videoData, success: true };
+    return { data: res.data as VideoData, success: true };
   } catch (error) {
     handleError(error, "Failed to generate video", "Please try again later.");
   }

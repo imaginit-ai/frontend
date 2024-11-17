@@ -129,7 +129,8 @@ export type WaitlistLocation = {
 };
 
 export type VideoData = {
-  videoURL: string;
+  s3_url: string;
+  message: string;
 };
 
 export type FragileResponse<T> = {

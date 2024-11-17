@@ -11,7 +11,6 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem } from "../ui/form";
 import { generateVideo } from "@/endpoints";
-import { Progress } from "../ui/progress";
 
 const formSchema = z.object({
   prompt: z.string().min(1),
@@ -109,10 +108,10 @@ const VideoCreator = () => {
             <TypographyP className="text-center text-muted-foreground text-xl">
               Generating video...
             </TypographyP>
-            <Progress
+            {/* <Progress
               value={progressValue}
               className="w-[360px] h-[8px] mt-6"
-            />
+            /> */}
           </div>
         </Skeleton>
         {state === VideoCreatorState.Error && (
@@ -125,11 +124,11 @@ const VideoCreator = () => {
           </Alert>
         )}
       </div>
-      {state === VideoCreatorState.Idle && videoData?.videoURL && (
+      {state === VideoCreatorState.Idle && videoData?.s3_url && (
         <div className="w-full flex justify-center items-center mt-5 overflow-hidden rounded-md glass">
           <video
             className="w-full rounded-md"
-            src={videoData.videoURL}
+            src={videoData.s3_url}
             controls={true}
             autoPlay={true}
           />
