@@ -9,12 +9,42 @@ import { TypographyP } from "../ui/typography";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem } from "../ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "../ui/form";
 import { generateVideo } from "@/endpoints";
 
 const formSchema = z.object({
-  prompt: z.string().min(1),
+  prompt: z
+    .string()
+    .trim()
+    .min(1, { message: "Please enter a prompt" })
+    .max(50, {
+      message:
+        "Please enter a prompt with less than 50 characters. We recommend keeping it short and sweet.",
+    }),
 });
+// .superRefine((values, ctx) => {
+//   if (values.prompt.trim().length === 0) {
+//     return ctx.addIssue({
+//       code: z.ZodIssueCode.custom,
+//       message: "Please enter a prompt",
+//       path: ["prompt"],
+//     });
+//   }
+//   if (values.prompt.length > 50) {
+//     return ctx.addIssue({
+//       code: z.ZodIssueCode.custom,
+//       message:
+//         "Please enter a prompt with less than 50 characters. We recommend keeping it short and sweet.",
+//       path: ["prompt"],
+//     });
+//   }
+// });
 
 const VideoCreator = () => {
   const [prompt, setPrompt] = useState<string>("");
@@ -39,6 +69,8 @@ const VideoCreator = () => {
     if (res.success) {
       setVideoData(res.data);
       setState(VideoCreatorState.Idle);
+    } else {
+      setState(VideoCreatorState.Error);
     }
   };
 
@@ -73,6 +105,7 @@ const VideoCreator = () => {
                       {...field}
                     />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -80,7 +113,8 @@ const VideoCreator = () => {
               className="icon-button"
               type="submit"
               disabled={
-                !watchPromptInput || state === VideoCreatorState.GeneratingVideo
+                !form.formState.isValid ||
+                state === VideoCreatorState.GeneratingVideo
               }
             >
               Generate
@@ -108,6 +142,9 @@ const VideoCreator = () => {
             <TypographyP className="text-center text-muted-foreground text-xl">
               Generating video...
             </TypographyP>
+            <TypographyP className="text-center text-muted-foreground text-sm">
+              This can take up to 2 minutes.
+            </TypographyP>
             {/* <Progress
               value={progressValue}
               className="w-[360px] h-[8px] mt-6"
@@ -115,7 +152,7 @@ const VideoCreator = () => {
           </div>
         </Skeleton>
         {state === VideoCreatorState.Error && (
-          <Alert variant="destructive">
+          <Alert variant="destructive" className="mt-6">
             <AlertCircle className="h-4 w-4" />
             <AlertTitle>Failed to generate video</AlertTitle>
             <AlertDescription>

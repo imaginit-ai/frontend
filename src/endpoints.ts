@@ -1,6 +1,5 @@
 import { FragileResponse, VideoData } from "./types";
 import { handleError } from "./utils/errorUtils";
-import axios from "axios";
 
 enum Backend {
   Local = import.meta.env.VITE_LOCAL_API_URL,
@@ -18,24 +17,35 @@ export async function generateVideo(
   userID: string,
   prompt: string
 ): Promise<FragileResponse<VideoData>> {
+  const formData = new FormData();
+  formData.append("concept", prompt);
+  formData.append("age", "18");
+  formData.append("max_retries", "3");
+
   try {
-    const res = await axios.post(
-      GENERATE_VIDEO_URL(),
-      {
-        prompt: prompt,
+    const res = await fetch(GENERATE_VIDEO_URL(), {
+      method: "POST",
+      body: formData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "imaginit-header": import.meta.env.VITE_IMAGINIT_HEADER,
+        "Access-Control-Allow-Origin": "*",
       },
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-    if (res.status !== 200 || !res.data) {
-      throw new Error("Failed to generate video");
+    });
+
+    if (!res.ok) {
+      handleError(
+        res.statusText,
+        "Failed to generate video",
+        "Please try again later."
+      );
+      return { data: undefined, success: false };
     }
-    return { data: res.data as VideoData, success: true };
+
+    const resData = (await res.json()) as VideoData;
+    return { data: resData, success: true };
   } catch (error) {
     handleError(error, "Failed to generate video", "Please try again later.");
+    return { data: undefined, success: false };
   }
-  return { data: undefined, success: false };
 }
