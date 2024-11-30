@@ -28,27 +28,14 @@ const formSchema = z.object({
         "Please enter a prompt with less than 50 characters. We recommend keeping it short and sweet.",
     }),
 });
-// .superRefine((values, ctx) => {
-//   if (values.prompt.trim().length === 0) {
-//     return ctx.addIssue({
-//       code: z.ZodIssueCode.custom,
-//       message: "Please enter a prompt",
-//       path: ["prompt"],
-//     });
-//   }
-//   if (values.prompt.length > 50) {
-//     return ctx.addIssue({
-//       code: z.ZodIssueCode.custom,
-//       message:
-//         "Please enter a prompt with less than 50 characters. We recommend keeping it short and sweet.",
-//       path: ["prompt"],
-//     });
-//   }
-// });
 
 const VideoCreator = () => {
-  const [prompt, setPrompt] = useState<string>("");
-  const [videoData, setVideoData] = useState<VideoData | undefined>();
+  const [videoData, setVideoData] = useState<VideoData | undefined>({
+    s3_url:
+      "https://videos-universal.s3.us-east-2.amazonaws.com/Blockchain_7cc666cdc17c4def8f5beb534a99b8ba.mp4?response-content-disposition=inline&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEL7%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMiJHMEUCIFa07boiOdplGmolAAlculQPw0EIK2qJdgStL9Z%2FqcZcAiEA3JfK0c3lpA8Q34D%2FqAlAjx1Xgw5cCANf3YhyUoims2sqywMIZxAAGgw5NjEzNDE1MTMzMzkiDGkvXw%2Fmvdg6aIhFGSqoA18M5otM5DAqdjodF9ytoODJl3GnrV8NA0K2NLjlDcjc8qdoAvuOZdvC9LvjbBmH0shBkGKJGHAlSmryOMN8Qb2abiEQ5ELeabshcP12s8wIX6cRyEKr2wANLtT4LuXud9SI8kqRQXqIFrJFmzjAb%2FT85Sw7Jem7Zcgu0aT0HNfyuG991CKr5pSC1aAVP%2FLt0xE2BYeLsODeySS8%2BkwA8FdS9wP3cvyOEpGdJJRuhxorcRU52szCLQzkEFt6yAbarJRSFGaJ7BjwVZtSmV2hJGQkL96biltubittugEuCBRoaIqUWn4f8RctOAQi1wWpbHXKD3WwKesz%2FH%2B6UUHtQvCSHLlMVRNqvQM9NN%2BMmdBrDOHK9c7gtFF5wxHrhQ0LDZZrziE1BpSJ1twlvNI1wIg07N19tWbG8gIzNWB%2BegM1nkKH2GiUzxU%2BYTkdmQO3eceuLvHqgrHsNCk4BCZ6g%2FKRiI9oKIxqNx2jydUeHPQeG6daXz94lrQUEy8El2BcwNZoLFy13pvzh2Ks595TCTYex8W37chOwt2Q2usIfbpytwRhyXefl9sw3rCjugY65AIBJB16uXhyZ2T7tA6ODKk2jDpiuVDuOpiggbZC662DaMbwrCsma2pwMBETjw%2BsrRpqO9Oseh3Sa16AeGLBlCePdZ5fk4pM9BqJGXiTBAtzMb5FWxnGWh8ptScCnZNa1GLf%2ByAP5P2ey4i9Bj4P8%2FvG%2B7vjZcbkBcE8Nz2oX%2FVXD%2Fxmlt9V2jwPZ61sjQV7lp6VCfKX3ggmba6v%2Fvf%2Fg0ykQSLsZP%2Fa5%2FJWpxlgta%2Fp8eerJ4xwPbBTp3n04Ab1LWmkdSv1u6BnX7HpYVU%2FCKaoWKtxDxgnwKn24NxaUVnYroEIiFzSPSdQCdHC37wYmyMj6jp4j3bphnBTh0kLEvuZfe9eZplSdDqyZUHxYQWKxPFpMSkWeIGSVRC%2BvwyVo3axpzL64vU%2FicZAY%2FV%2FUxFoNMHlGu5%2FjCNK7MwDDqx5q5uOLAKjdXnZLsAH90oS6EOY9d%2Bd5ZIVshfXNiWozkptj1otDA%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIA57VDLLZ564KOI2Q5%2F20241128%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20241128T214252Z&X-Amz-Expires=43200&X-Amz-SignedHeaders=host&X-Amz-Signature=1568d956956b46d388b93acd265872cb07c6bde218878e9c932e49ea83086805",
+    message: "Here's a video explaining blockchain.",
+  });
+  // const [videoData, setVideoData] = useState<VideoData | undefined>();
   const [quota, setQuota] = useState<number>(5);
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [state, setState] = useState<VideoCreatorState>(VideoCreatorState.Idle);
@@ -65,7 +52,7 @@ const VideoCreator = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setState(VideoCreatorState.GeneratingVideo);
-    const res = await generateVideo("", prompt);
+    const res = await generateVideo(values.prompt);
     if (res.success) {
       setVideoData(res.data);
       setState(VideoCreatorState.Idle);

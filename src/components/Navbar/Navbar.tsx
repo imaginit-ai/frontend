@@ -13,10 +13,6 @@ import "./Navbar.css";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
 import { useLocation } from "react-router-dom";
-import { Alert, AlertTitle } from "../ui/alert";
-import { Terminal } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-import { config } from "@/config";
 
 const actionBtnStyle = cn(buttonVariants({ variant: "accent", size: "sm" }));
 
@@ -49,14 +45,14 @@ export const getNavbarLinkElement = (link: SiteMapLink, index: number) => {
 
 const Navbar = () => {
   const location = useLocation();
-  const announcementHeaderRef = useRef<HTMLDivElement>(null);
-  const [announcementHeight, setAnnouncementHeight] = useState(0);
+  // const announcementHeaderRef = useRef<HTMLDivElement>(null);
+  // const [announcementHeight, setAnnouncementHeight] = useState(0);
 
-  useEffect(() => {
-    if (config.environment !== "production") {
-      setAnnouncementHeight(announcementHeaderRef.current?.offsetHeight || 0);
-    }
-  }, [announcementHeaderRef]);
+  // useEffect(() => {
+  //   if (config.environment !== "production") {
+  //     setAnnouncementHeight(announcementHeaderRef.current?.offsetHeight || 0);
+  //   }
+  // }, [announcementHeaderRef]);
 
   const updateHideNavbar = (): boolean => {
     const slug = location.pathname as keyof typeof SiteMap;
@@ -81,7 +77,7 @@ const Navbar = () => {
 
   return (
     <>
-      {config.environment !== "production" && (
+      {/* {config.environment !== "production" && (
         <Alert
           className="fixed left-0 w-full !z-[100] top-0 rounded-none bg-destructive px-[100px]"
           variant="destructive"
@@ -97,12 +93,12 @@ const Navbar = () => {
             features.
           </AlertTitle>
         </Alert>
-      )}
+      )} */}
       <div
         className="navbar h-navbar-height w-full flex items-center flex-col backdrop-blur-[14px] fixed"
         style={{
           display: updateHideNavbar() ? "none" : "flex",
-          top: announcementHeight,
+          // top: announcementHeight,
         }}
       >
         <div className="web-menu flex h-full items-center justify-between px-[100px] w-full max-w-[1400px]">
