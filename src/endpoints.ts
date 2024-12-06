@@ -13,15 +13,12 @@ const BACKEND_URL = Backend.Production;
 // Video Generation
 export const GENERATE_VIDEO_URL = () => `${BACKEND_URL}/video/generate`;
 
-export async function generateVideo(
-  prompt: string
-): Promise<FragileResponse<VideoData>> {
+export async function generateVideo(prompt: string): Promise<FragileResponse<VideoData>> {
   try {
     const res = await axios.post(
       GENERATE_VIDEO_URL(),
       {
         prompt,
-        is_not_shepherd: true,
       },
       {
         headers: {
@@ -31,11 +28,7 @@ export async function generateVideo(
       }
     );
     if (res.status !== 200 || !res.data) {
-      handleError(
-        res.statusText,
-        "Failed to generate video",
-        "Please try again later."
-      );
+      handleError(res.statusText, "Failed to generate video", "Please try again later.");
       return { data: undefined, success: false };
     }
     return { data: res.data as VideoData, success: true };
